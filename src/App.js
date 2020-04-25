@@ -3,7 +3,27 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
+      <div className="container">
+        <div className="square">
+        </div>
+        <div className="square">
+        </div>
+        <div className="square">
+        </div>
+        <div className="square">
+        </div>
+        <div className="square">
+        </div>
+        <div className="square">
+        </div>
+        <div className="square">
+        </div>
+        <div className="square">
+        </div>
+        <div className="square">
+        </div>
+      </div>
     </div>
   );
 }

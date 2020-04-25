@@ -1,0 +1,20 @@
+.app {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-wrap: wrap
+}
+
+.square {
+  flex: 1 0 32%;
+  border: 1px solid greenyellow;
+}
