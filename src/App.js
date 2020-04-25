@@ -14,8 +14,11 @@ function App() {
   const [grid, setGrid] = useState(initialGrid);
   const [playerSymbol, setPlayerSymbol] = useState(player1);
 
-
   const setSymbol = (previousGrid, row, col, player) => {
+    if (previousGrid[row][col]) {
+      return;
+    }
+
     const newGrid = [...previousGrid];
     newGrid[row][col] = player;
 
