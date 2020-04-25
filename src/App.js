@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
@@ -13,6 +13,29 @@ function App() {
 
   const [grid, setGrid] = useState(initialGrid);
   const [playerSymbol, setPlayerSymbol] = useState(player1);
+  const [winner, setWinner] = useState();
+
+  useEffect(() => {
+    gridStatus(grid)
+  }, [grid])
+
+  const renderGrid = grid => {
+    const result = [];
+    for (let row = 0; row < grid.length; row++) {
+      for (let col = 0; col < grid[row].length; col++) {
+        result.push(
+          <div
+            onClick={() => setSymbol(grid, row, col, playerSymbol)}
+            className="square"
+            key={`${row}-${col}`}
+          >
+            {grid[row][col]}
+          </div>
+        )
+      }
+    }
+    return result;
+  }
 
   const setSymbol = (previousGrid, row, col, player) => {
     if (previousGrid[row][col]) {
@@ -32,30 +55,71 @@ function App() {
     setGrid(newGrid);
   }
 
-  const renderGrid = grid => {
-    const result = [];
+  const gridStatus = (grid) => {
+    let winner;
 
+    const lineChecker = line => {
+      const P1 = line.every(val => val === player1);
+      const P2 = line.every(val => val === player2);
+
+      if (P1) {
+        winner = 'Player 1'
+      }
+
+      if (P2) {
+        winner = 'Player 2'
+      }
+
+      return P1 || P2
+    }
+
+    const verticalGrid = [...initialGrid];
+    const diagonalGrid = [
+      ['', '', ''],
+      ['', '', '']
+    ]
+
+    // Checking Horizontal Lines
     for (let row = 0; row < grid.length; row++) {
+      if (lineChecker(grid[row])) {
+        setWinner(winner)
+        return;
+      }
+
       for (let col = 0; col < grid[row].length; col++) {
-        result.push(
-          <div
-            onClick={() => setSymbol(grid, row, col, playerSymbol)}
-            className="square"
-            key={`${row}-${col}`}
-          >
-            {grid[row][col]}
-          </div>
-        )
+        const value = grid[row][col];
+
+        //Converting vertical lines to rows
+        verticalGrid[col][row] = value
+
+        //Converting diagonla lines to rows
+        if (row === col) {
+          diagonalGrid[0][col] = grid[row][col];
+          diagonalGrid[1][col] = [...grid[row]].reverse()[col]
+        }
       }
     }
 
-    return result;
+    // Checking Vertical lines
+    for (let row = 0; row < verticalGrid.length; row++) {
+      if (lineChecker(verticalGrid[row])) {
+        setWinner(winner)
+        return;
+      }
+    }
+
+    for (let row = 0; row < diagonalGrid.length; row++) {
+      if (lineChecker(diagonalGrid[row])) {
+        setWinner(winner)
+        return;
+      }
+    }
   }
 
   return (
     <div className="app">
       <div className="container">
-        {renderGrid(grid)}
+        {winner || renderGrid(grid)}
       </div>
     </div>
   );
