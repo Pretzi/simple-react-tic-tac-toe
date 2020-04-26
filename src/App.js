@@ -38,7 +38,7 @@ function App() {
   }
 
   const setSymbol = (previousGrid, row, col, player) => {
-    if (previousGrid[row][col]) {
+    if (previousGrid[row][col] || winner) {
       return;
     }
 
@@ -116,11 +116,34 @@ function App() {
     }
   }
 
+  const renderResults = () => {
+    if (winner) {
+      return (
+        <div className="results">
+          <div className="results-title">{winner} wins!</div>
+        </div>
+      )
+    }
+    return;
+  }
+
+  const playAgain = () => {
+    setGrid(initialGrid);
+    setWinner(null);
+    setPlayerSymbol(player1)
+  }
+
+
   return (
     <div className="app">
-      <div className="container">
-        {winner || renderGrid(grid)}
+      {renderResults()}
+      <div className="grid">
+        {renderGrid(grid)}
       </div>
+      <div className="play-btn" onClick={playAgain}>
+        Play Again
+      </div>
+
     </div>
   );
 }

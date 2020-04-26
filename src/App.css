@@ -5,13 +5,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
-.container {
+.grid {
   width: 300px;
   height: 300px;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
+  margin-bottom: 30px;
 }
 
 .square {
@@ -27,4 +30,34 @@
   box-sizing: border-box;
   cursor: pointer;
   user-select: none;
+}
+
+.results{
+  background-color: greenyellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 5px;
+}
+
+.results-title {
+  font-size: 25px;
+  color: black;
+	font-family: Lucida Console,Lucida Sans Typewriter,monaco,Bitstream Vera Sans Mono,monospace; 
+}
+
+.play-btn {
+  border: 1px solid greenyellow;
+  padding: 8px 16px 8px 16px;
+  color: greenyellow;
+  font-size: 25px;
+}
+
+.play-btn:hover {
+  border: 1px solid greenyellow;
+  background-color: greenyellow;
+  color: black;
+  font-size: 25px;
+  cursor: pointer;
 }
