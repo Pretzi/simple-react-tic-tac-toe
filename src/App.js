@@ -133,7 +133,6 @@ function App() {
     setPlayerSymbol(player1)
   }
 
-
   return (
     <div className="app">
       {renderResults()}
@@ -143,7 +142,6 @@ function App() {
       <div className="play-btn" onClick={playAgain}>
         Play Again
       </div>
-
     </div>
   );
 }
