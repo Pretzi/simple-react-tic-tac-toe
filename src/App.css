@@ -21,7 +21,7 @@ body {
   flex-wrap: wrap;
   flex-direction: column;
   margin-bottom: 30px;
-}
+ }
 
 .square {
   flex: 1 0 32%;
